@@ -1,0 +1,70 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: #f0f2f0; /* Fondo gris muy claro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.contenedor-principal {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 500px;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Sombra sutil */
+}
+
+h1 {
+    font-family: Georgia, 'Times New Roman', Times, serif; /* Tipografía serif para el título */
+    font-size: 28px;
+    color: #1a1a1a;
+    margin-bottom: 25px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    border: 1px solid #dcdcdc;
+    border-radius: 6px;
+    font-size: 15px;
+    color: #333;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    border-color: #3a7c6e;
+}
+
+#btn-agregar {
+    background-color: #3a7c6e;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-bottom: 20px;
+}
+
+#btn-agregar:hover {
+    background-color: #2e6358;
+}
+
+.buscador {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
