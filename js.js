@@ -3,20 +3,30 @@ let contactos = [];
 const inputNombre = document.getElementById('input-nombre');
 const inputTelefono = document.getElementById('input-telefono');
 const btnAgregar = document.getElementById('btn-agregar');
+const inputBuscar = document.getElementById('input-buscar'); // NUEVO
 const listaContactos = document.getElementById('lista-contactos');
 const mensajeVacio = document.getElementById('mensaje-vacio');
 const contadorSpan = document.getElementById('contador');
 
-function renderizarContactos() {
+function renderizarContactos(filtro = '') {
     listaContactos.innerHTML = '';
-    
-    if (contactos.length === 0) {
+
+    const contactosFiltrados = contactos.filter(contacto => 
+        contacto.nombre.toLowerCase().includes(filtro.toLowerCase())
+    );
+
+    if (contactosFiltrados.length === 0) {
         mensajeVacio.style.display = 'block';
+        if (contactos.length > 0) {
+            mensajeVacio.textContent = 'No se encontraron contactos con ese nombre.';
+        } else {
+            mensajeVacio.textContent = 'Todavia no agregaste contactos.';
+        }
     } else {
         mensajeVacio.style.display = 'none';
     }
 
-    contactos.forEach((contacto) => {
+    contactosFiltrados.forEach((contacto) => {
         const divContacto = document.createElement('div');
         divContacto.classList.add('contacto-item');
 
@@ -72,6 +82,7 @@ function agregarContacto() {
 
     inputNombre.value = '';
     inputTelefono.value = '';
+    inputBuscar.value = '';
     
     renderizarContactos();
     actualizarContador();
@@ -80,7 +91,7 @@ function agregarContacto() {
 
 function eliminarContacto(id) {
     contactos = contactos.filter(contacto => contacto.id !== id);
-    renderizarContactos();
+    renderizarContactos(inputBuscar.value); // Mantenemos el filtro actual
     actualizarContador();
 }
 
@@ -91,6 +102,11 @@ inputNombre.addEventListener('keypress', (e) => {
 });
 inputTelefono.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') agregarContacto();
+});
+
+inputBuscar.addEventListener('input', (e) => {
+    renderizarContactos(e.target.value);
+
 });
 
 renderizarContactos();
