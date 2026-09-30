@@ -5,6 +5,7 @@ const inputTelefono = document.getElementById('input-telefono');
 const btnAgregar = document.getElementById('btn-agregar');
 const listaContactos = document.getElementById('lista-contactos');
 const mensajeVacio = document.getElementById('mensaje-vacio');
+const contadorSpan = document.getElementById('contador');
 
 function renderizarContactos() {
     listaContactos.innerHTML = '';
@@ -33,9 +34,23 @@ function renderizarContactos() {
         divInfo.appendChild(spanNombre);
         divInfo.appendChild(spanTelefono);
 
+        const btnEliminar = document.createElement('button');
+        btnEliminar.classList.add('btn-eliminar');
+        btnEliminar.textContent = 'Eliminar';
+        
+        btnEliminar.addEventListener('click', () => {
+            eliminarContacto(contacto.id);
+        });
+
         divContacto.appendChild(divInfo);
+        divContacto.appendChild(btnEliminar);
+
         listaContactos.appendChild(divContacto);
     });
+}
+
+function actualizarContador() {
+    contadorSpan.textContent = contactos.length;
 }
 
 function agregarContacto() {
@@ -59,9 +74,15 @@ function agregarContacto() {
     inputTelefono.value = '';
     
     renderizarContactos();
+    actualizarContador();
     inputNombre.focus();
 }
 
+function eliminarContacto(id) {
+    contactos = contactos.filter(contacto => contacto.id !== id);
+    renderizarContactos();
+    actualizarContador();
+}
 
 btnAgregar.addEventListener('click', agregarContacto);
 
@@ -73,3 +94,4 @@ inputTelefono.addEventListener('keypress', (e) => {
 });
 
 renderizarContactos();
+actualizarContador();
